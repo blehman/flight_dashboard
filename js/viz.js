@@ -538,6 +538,193 @@ function build_choropleth(){
           .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
           .attr("class", "states")
           .attr("d", path);
+
+        // Build selector
+        function build_selector(){
+          var color_tool = {
+            'q0-9':'#ffffe5'
+            ,'q1-9':'#fff7bc'
+            ,'q2-9':'#fee391'
+            ,'q3-9':'#fec44f'
+            ,'q4-9':'#fe9929'
+            ,'q5-9':'#ec7014'
+            ,'q6-9':'#cc4c02'
+            ,'q7-9':'#993404'
+            ,'q8-9':'#662506' }
+            var data = d3.range(800).map(Math.random);
+
+            var unemp=[];
+
+            d3.tsv("data/unemployment.tsv", function(unemployment) {
+                console.log(['unemployment:',unemployment])
+                unemployment.forEach(function(d){unemp.push(+d.rate);});
+                //rateById.set(unemployment.id, +unemployment.rate);
+                console.log(["rateById['1001']:",rateById._['1001']])
+                console.log(['brush rateById:',rateById])
+                console.log(['unemp:',unemp])
+                var margin = {top: 194, right: 50, bottom: 214, left: 50},
+                    width = 2000 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom,
+                    centering = false,
+                    center,
+                    alpha = .2;
+
+                var x = d3.scale.linear()
+                    .domain(d3.extent(unemp))
+                    .range([0, width]);
+
+                var y = d3.random.normal(height / 2, height / 8);
+
+                var brush = d3.svg.brush()
+                    .x(x)
+                    .extent([.15, .20])
+                    .on("brush", brushmove);
+
+                var arc = d3.svg.arc()
+                    .outerRadius(height / 2)
+                    .startAngle(0)
+                    .endAngle(function(d, i) { return i ? -Math.PI : Math.PI; });
+
+                var brush_selector = svg.append("g").attr('id','brush_selector')
+                  .append('svg')
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                brush_selector.append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.svg.axis()
+                      .scale(x)
+                      .orient("bottom"));
+
+                var dot = brush_selector.append("g")
+                    .attr("class", "dots")
+                  .selectAll("circle")
+                    .data(unemp)
+                  .enter().append("circle")
+                    .attr("transform", function(d) { return "translate(" + x(d) + "," + y() + ")"; })
+                    .attr("r", 5.5);
+
+                var gBrush = brush_selector.append("g")
+                    .attr("class", "brush")
+                    .call(brush);
+
+                gBrush.selectAll(".resize").append("path")
+                    .attr("transform", "translate(0," +  height / 2 + ")")
+                    .attr("d", arc);
+
+                gBrush.selectAll("rect")
+                    .attr("height", height)
+                    .style('stroke','#fff7bc')
+                    .style('stroke-opacity',0.3);
+
+                gBrush.select(".background")
+                    .on("mousedown.brush", brushcenter)
+                    .on("touchstart.brush", brushcenter);
+
+                gBrush.call(brush.event);
+
+                function brushmove() {
+                  var extent = brush.extent();
+                  dot.classed("selected", function(d) { return extent[0] <= d && d <= extent[1]; });
+                  console.log(['d3.entries stuff1',d3.entries(rateById._)])
+                  console.log(['d3.entries stuff',d3.entries(rateById._)])
+                  var myKeys = [];
+                  d3.entries(rateById._).filter(function(d){
+                    if (extent[0] <= d.value && d.value <= extent[1]){
+                        myKeys.push(d.key)
+                    }
+                  });
+                  console.log(['myKeys:',myKeys])
+
+                  // THIS BLOCK OF CODE IS BREAKING SOMETHING
+                  if (myKeys.length>0){
+                      myKeys.forEach(function(d){
+                          console.log(d)
+                          console.log(d3.select('#c'+d))
+                          console.log(d3.select('#c'+d) != null)
+                          if ( d3.select('#c'+d) != null){
+                            console.log(d)
+                              var mapClass = d3.select('#c'+d).attr('class');
+                              console.log(mapClass)
+                              var mapColor = mapClass.match('^q[0-9]*-[0-9]*')[0];
+                              console.log(mapColor)
+                              d3.select('#c'+d).transition()
+                                    .duration(1000)
+                                    .style('fill','red')
+                                    .transition()
+                                    .delay(2000)
+                                    .duration(3000)
+                                    .style('fill',color_tool[mapColor]);
+                          }
+
+                      })
+                  }
+
+                }
+
+                function brushcenter() {
+                  var self = d3.select(window),
+                      target = d3.event.target,
+                      extent = brush.extent(),
+                      size = extent[1] - extent[0],
+                      domain = x.domain(),
+                      x0 = domain[0] + size / 2,
+                      x1 = domain[1] - size / 2;
+
+                  recenter(true);
+                  brushmove();
+
+                  if (d3.event.changedTouches) {
+                    self.on("touchmove.brush", brushmove).on("touchend.brush", brushend);
+                  } else {
+                    self.on("mousemove.brush", brushmove).on("mouseup.brush", brushend);
+                  }
+
+                  function brushmove() {
+                    d3.event.stopPropagation();
+                    center = Math.max(x0, Math.min(x1, x.invert(d3.mouse(target)[0])));
+                    recenter(false);
+                  }
+
+                  function brushend() {
+                    brushmove();
+                    self.on(".brush", null);
+                  }
+                }
+
+                function recenter(smooth) {
+                  if (centering) return; // timer is active and already tweening
+                  if (!smooth) return void tween(1); // instantaneous jump
+                  centering = true;
+
+                  function tween(alpha) {
+                    var extent = brush.extent(),
+                        size = extent[1] - extent[0],
+                        center1 = center * alpha + (extent[0] + extent[1]) / 2 * (1 - alpha);
+
+                    gBrush
+                        .call(brush.extent([center1 - size / 2, center1 + size / 2]))
+                        .call(brush.event);
+
+                    return !(centering = Math.abs(center1 - center) > 1e-3);
+                  }
+
+                  d3.timer(function() {
+                    return tween(alpha);
+                  });
+                }
+                d3.select('#brush_selector')
+                  .attr('transform','translate('+500+','+0+')');
+
+            });
+        }
+
+        build_selector()
+
+
     }
 
     d3.select(self.frameElement).style("height", height + "px");
@@ -547,174 +734,4 @@ function build_choropleth(){
 build_choropleth()
 
 
-// Build selector
-function build_selector(){
-    var data = d3.range(800).map(Math.random);
 
-    var unemp=[];
-
-    d3.tsv("data/unemployment.tsv", function(unemployment) {
-        console.log(['unemployment:',unemployment])
-        unemployment.forEach(function(d){unemp.push(+d.rate);});
-        //rateById.set(unemployment.id, +unemployment.rate);
-        console.log(["rateById['1001']:",rateById._['1001']])
-        console.log(['brush rateById:',rateById])
-        console.log(['unemp:',unemp])
-        var margin = {top: 194, right: 50, bottom: 214, left: 50},
-            width = 2000 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom,
-            centering = false,
-            center,
-            alpha = .2;
-
-        var x = d3.scale.linear()
-            .domain(d3.extent(unemp))
-            .range([0, width]);
-
-        var y = d3.random.normal(height / 2, height / 8);
-
-        var brush = d3.svg.brush()
-            .x(x)
-            .extent([.15, .20])
-            .on("brush", brushmove);
-
-        var arc = d3.svg.arc()
-            .outerRadius(height / 2)
-            .startAngle(0)
-            .endAngle(function(d, i) { return i ? -Math.PI : Math.PI; });
-
-        var brush_selector = svg.append("g").attr('id','brush_selector')
-          .append('svg')
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        brush_selector.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.svg.axis()
-              .scale(x)
-              .orient("bottom"));
-
-        var dot = brush_selector.append("g")
-            .attr("class", "dots")
-          .selectAll("circle")
-            .data(unemp)
-          .enter().append("circle")
-            .attr("transform", function(d) { return "translate(" + x(d) + "," + y() + ")"; })
-            .attr("r", 5.5);
-
-        var gBrush = brush_selector.append("g")
-            .attr("class", "brush")
-            .call(brush);
-
-        gBrush.selectAll(".resize").append("path")
-            .attr("transform", "translate(0," +  height / 2 + ")")
-            .attr("d", arc);
-
-        gBrush.selectAll("rect")
-            .attr("height", height)
-            .style('stroke','#fff7bc')
-            .style('stroke-opacity',0.3);
-
-        gBrush.select(".background")
-            .on("mousedown.brush", brushcenter)
-            .on("touchstart.brush", brushcenter);
-
-        gBrush.call(brush.event);
-
-        function brushmove() {
-          var extent = brush.extent();
-          dot.classed("selected", function(d) { return extent[0] <= d && d <= extent[1]; });
-          console.log(['d3.entries stuff1',d3.entries(rateById._)])
-          console.log(['d3.entries stuff',d3.entries(rateById._)])
-          var myKeys = [];
-          d3.entries(rateById._).filter(function(d){
-            if (extent[0] <= d.value && d.value <= extent[1]){
-                myKeys.push(d.key)
-            }
-          });
-          console.log(['myKeys:',myKeys])
-
-          // THIS BLOCK OF CODE IS BREAKING SOMETHING
-          if (myKeys.length>0){
-              myKeys.forEach(function(d){
-                  console.log(d)
-                  console.log(d3.select('#c'+d))
-                  console.log(d3.select('#c'+d) != null)
-                  if ( d3.select('#c'+d) != null){
-                    console.log(d)
-                      var mapClass = d3.select('#c'+d).attr('class');
-                      var mapColor = mapClass.match('^q.* ').replace(' ','');
-                      d3.select('#c4005').transition()
-                            .duration(1000)
-                            .style('fill','red');
-                            d3.select('#c4005').transition()
-                            .delay(1000).duration(3000)
-                            .style('fill',mapColor);
-                  }
-
-              })
-          }
-
-        }
-
-        function brushcenter() {
-          var self = d3.select(window),
-              target = d3.event.target,
-              extent = brush.extent(),
-              size = extent[1] - extent[0],
-              domain = x.domain(),
-              x0 = domain[0] + size / 2,
-              x1 = domain[1] - size / 2;
-
-          recenter(true);
-          brushmove();
-
-          if (d3.event.changedTouches) {
-            self.on("touchmove.brush", brushmove).on("touchend.brush", brushend);
-          } else {
-            self.on("mousemove.brush", brushmove).on("mouseup.brush", brushend);
-          }
-
-          function brushmove() {
-            d3.event.stopPropagation();
-            center = Math.max(x0, Math.min(x1, x.invert(d3.mouse(target)[0])));
-            recenter(false);
-          }
-
-          function brushend() {
-            brushmove();
-            self.on(".brush", null);
-          }
-        }
-
-        function recenter(smooth) {
-          if (centering) return; // timer is active and already tweening
-          if (!smooth) return void tween(1); // instantaneous jump
-          centering = true;
-
-          function tween(alpha) {
-            var extent = brush.extent(),
-                size = extent[1] - extent[0],
-                center1 = center * alpha + (extent[0] + extent[1]) / 2 * (1 - alpha);
-
-            gBrush
-                .call(brush.extent([center1 - size / 2, center1 + size / 2]))
-                .call(brush.event);
-
-            return !(centering = Math.abs(center1 - center) > 1e-3);
-          }
-
-          d3.timer(function() {
-            return tween(alpha);
-          });
-        }
-        d3.select('#brush_selector')
-          .attr('transform','translate('+500+','+0+')');
-
-    });
-}
-
-build_selector()
