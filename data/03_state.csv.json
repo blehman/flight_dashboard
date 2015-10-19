@@ -1,0 +1,98 @@
+{
+  "Tennessee": {
+    "moms": "",
+    "abbrev": "TN",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "Georgia": {
+    "moms": "4.0",
+    "abbrev": "GA",
+    "baseline": "3.0",
+    "dads": "3.0"
+  },
+  "New Jersey": {
+    "moms": "",
+    "abbrev": "NJ",
+    "baseline": "3.0",
+    "dads": "3.0"
+  },
+  "Washington": {
+    "moms": "3.0",
+    "abbrev": "WA",
+    "baseline": "3.0",
+    "dads": ""
+  },
+  "Michigan": {
+    "moms": "4.0",
+    "abbrev": "MI",
+    "baseline": "",
+    "dads": ""
+  },
+  "Florida": {
+    "moms": "5.0",
+    "abbrev": "FL",
+    "baseline": "5.0",
+    "dads": "6.0"
+  },
+  "Virginia": {
+    "moms": "4.0",
+    "abbrev": "VA",
+    "baseline": "4.0",
+    "dads": "3.0"
+  },
+  "North Carolina": {
+    "moms": "3.0",
+    "abbrev": "NC",
+    "baseline": "4.0",
+    "dads": "3.0"
+  },
+  "Illinois": {
+    "moms": "3.0",
+    "abbrev": "IL",
+    "baseline": "5.0",
+    "dads": "4.0"
+  },
+  "Pennsylvania": {
+    "moms": "5.0",
+    "abbrev": "PA",
+    "baseline": "6.0",
+    "dads": "3.0"
+  },
+  "New York": {
+    "moms": "5.0",
+    "abbrev": "NY",
+    "baseline": "8.0",
+    "dads": "5.0"
+  },
+  "California": {
+    "moms": "9.0",
+    "abbrev": "CA",
+    "baseline": "11.0",
+    "dads": "9.0"
+  },
+  "Massachusetts": {
+    "moms": "3.0",
+    "abbrev": "MA",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "Ohio": {
+    "moms": "5.0",
+    "abbrev": "OH",
+    "baseline": "5.0",
+    "dads": "5.0"
+  },
+  "Indiana": {
+    "moms": "",
+    "abbrev": "IN",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "Texas": {
+    "moms": "8.0",
+    "abbrev": "TX",
+    "baseline": "7.0",
+    "dads": "9.0"
+  }
+}

@@ -1,0 +1,14 @@
+interest_1,moms,dads,baseline,moms_dev,dads_dev
+Beauty,1.0,0.0,1.0,0.0,-1.0
+Business,3.0,5.0,3.0,0.0,2.0
+Events,4.0,6.0,5.0,-1.0,1.0
+Gaming,2.0,5.0,5.0,-3.0,0.0
+Health,1.0,0.0,0.0,1.0,0.0
+Hobbies and interests,15.0,11.0,13.0,2.0,-2.0
+Movies and television,33.0,29.0,29.0,4.0,0.0
+Music and radio,20.0,16.0,19.0,1.0,-3.0
+Personal finance,0.0,1.0,0.0,0.0,1.0
+Pets,1.0,0.0,0.0,1.0,0.0
+Sports,3.0,10.0,5.0,-2.0,5.0
+Style and fashion,6.0,2.0,4.0,2.0,-2.0
+Technology and computing,3.0,6.0,6.0,-3.0,0.0

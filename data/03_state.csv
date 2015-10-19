@@ -1,0 +1,17 @@
+state,moms,dads,baseline,moms_dev,dads_dev
+California,9.0,9.0,11.0,-2.0,-2.0
+Florida,5.0,6.0,5.0,0.0,1.0
+Georgia,4.0,3.0,3.0,1.0,0.0
+Illinois,3.0,4.0,5.0,-2.0,-1.0
+Indiana,,3.0,,,
+Massachusetts,3.0,3.0,,,
+Michigan,4.0,,,,
+New Jersey,,3.0,3.0,,0.0
+New York,5.0,5.0,8.0,-3.0,-3.0
+North Carolina,3.0,3.0,4.0,-1.0,-1.0
+Ohio,5.0,5.0,5.0,0.0,0.0
+Pennsylvania,5.0,3.0,6.0,-1.0,-3.0
+Tennessee,,3.0,,,
+Texas,8.0,9.0,7.0,1.0,2.0
+Virginia,4.0,3.0,4.0,0.0,-1.0
+Washington,3.0,,3.0,0.0,

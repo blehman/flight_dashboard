@@ -1,0 +1,11 @@
+interest_2,moms,dads,baseline,moms_dev,dads_dev
+Business and news,2.0,3.0,2.0,0.0,1.0
+Celebrity fan and gossip,4.0,2.0,3.0,1.0,-1.0
+Fashion,4.0,2.0,3.0,1.0,-1.0
+Movie news and general info,5.0,4.0,5.0,0.0,-1.0
+Music,6.0,5.0,7.0,-1.0,-2.0
+Pop,4.0,3.0,4.0,0.0,-1.0
+Reality TV,3.0,2.0,2.0,1.0,0.0
+Romance,3.0,1.0,1.0,2.0,0.0
+Sporting events,2.0,3.0,2.0,0.0,1.0
+World,3.0,2.0,3.0,0.0,-1.0

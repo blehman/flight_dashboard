@@ -1,0 +1,98 @@
+{
+  "VA": {
+    "moms": "4.0",
+    "state": "Virginia",
+    "baseline": "4.0",
+    "dads": "3.0"
+  },
+  "NJ": {
+    "moms": "",
+    "state": "New Jersey",
+    "baseline": "3.0",
+    "dads": "3.0"
+  },
+  "MA": {
+    "moms": "3.0",
+    "state": "Massachusetts",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "WA": {
+    "moms": "3.0",
+    "state": "Washington",
+    "baseline": "3.0",
+    "dads": ""
+  },
+  "TX": {
+    "moms": "8.0",
+    "state": "Texas",
+    "baseline": "7.0",
+    "dads": "9.0"
+  },
+  "OH": {
+    "moms": "5.0",
+    "state": "Ohio",
+    "baseline": "5.0",
+    "dads": "5.0"
+  },
+  "CA": {
+    "moms": "9.0",
+    "state": "California",
+    "baseline": "11.0",
+    "dads": "9.0"
+  },
+  "NC": {
+    "moms": "3.0",
+    "state": "North Carolina",
+    "baseline": "4.0",
+    "dads": "3.0"
+  },
+  "MI": {
+    "moms": "4.0",
+    "state": "Michigan",
+    "baseline": "",
+    "dads": ""
+  },
+  "TN": {
+    "moms": "",
+    "state": "Tennessee",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "NY": {
+    "moms": "5.0",
+    "state": "New York",
+    "baseline": "8.0",
+    "dads": "5.0"
+  },
+  "PA": {
+    "moms": "5.0",
+    "state": "Pennsylvania",
+    "baseline": "6.0",
+    "dads": "3.0"
+  },
+  "IL": {
+    "moms": "3.0",
+    "state": "Illinois",
+    "baseline": "5.0",
+    "dads": "4.0"
+  },
+  "GA": {
+    "moms": "4.0",
+    "state": "Georgia",
+    "baseline": "3.0",
+    "dads": "3.0"
+  },
+  "IN": {
+    "moms": "",
+    "state": "Indiana",
+    "baseline": "",
+    "dads": "3.0"
+  },
+  "FL": {
+    "moms": "5.0",
+    "state": "Florida",
+    "baseline": "5.0",
+    "dads": "6.0"
+  }
+}
