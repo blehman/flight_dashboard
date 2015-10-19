@@ -14,7 +14,7 @@
   shape-rendering: crispEdges;
 }
 
-
+/*
 .lineGraph.line {
   fill: none;
   stroke-width: 5.5px;
@@ -23,13 +23,14 @@
   stroke: #fff;
   fill:#fff;
 }
+*/
 
 .bar.positive {
-  fill: rgb(49,130,189);
+  fill: #fff7bc;
 }
 
 .bar.negative {
-  fill: rgb(49,163,84);
+  fill: #fe9929;
 }
 
 .axis text {
@@ -45,6 +46,17 @@
   fill:none;
 }
 */
+
+/* Zoom selection */
+.zoom {
+    zoom: 0.05;
+}
+
+/* Doughnut */
+.arc{
+  stroke: #fff;
+}
+
 
 
 

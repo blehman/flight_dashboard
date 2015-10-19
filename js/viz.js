@@ -1,6 +1,5 @@
 // http://chimera.labs.oreilly.com/books/1230000000345/ch12.html#_choropleth
 
-
 var furniColors =  {
   furniOrangeColor:'#FF7F00'
   , furniBeigeColor:'#F8F8F6'
@@ -13,7 +12,8 @@ var width = 3000, height = 3500, circle_r = 200;
 var svg = d3.select('body').append('svg')
           .attr("width",width)
           .attr("height",height)
-          .style('background','#2B3033');
+          .style('background','#2B3033')
+          .classed('zoom',true);
 /*
 var title = svg.append('g')
         .classed('title',true);
@@ -279,7 +279,7 @@ function build_arc(){
     var h = 700;
     var color = d3.scale.quantize()
             .domain([0,1])
-            .range(['rgb(49,163,84)','rgb(49,130,189)']);
+            .range(['#fe9929','#fee391']);
 
     var outerRadius = w / 2;
     var innerRadius = w/3;
@@ -305,7 +305,6 @@ function build_arc(){
         .attr("fill", function(d, i) {
             return color(i);
         })
-        .attr('opacity',0.80)
         .attr("d", arc);
 
     //Add values
@@ -433,7 +432,7 @@ build_lines();
 
 */
 
-/*
+
 function build_bars(){
 
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
@@ -486,11 +485,11 @@ function build_bars(){
       d.value = +d.value;
       return d;
     }
-    d3.select('#bars').attr('transform','translate('+400+','+2700+')')
+    d3.select('#bars').attr('transform','translate('+1400+','+1850+')')
 }
 
 build_bars()
-*/
+
 var rateById = d3.map();
 function build_choropleth(){
     var width = 960,
@@ -629,28 +628,19 @@ function build_choropleth(){
                 function brushmove() {
                   var extent = brush.extent();
                   dot.classed("selected", function(d) { return extent[0] <= d && d <= extent[1]; });
-                  console.log(['d3.entries stuff1',d3.entries(rateById._)])
-                  console.log(['d3.entries stuff',d3.entries(rateById._)])
                   var myKeys = [];
                   d3.entries(rateById._).filter(function(d){
                     if (extent[0] <= d.value && d.value <= extent[1]){
                         myKeys.push(d.key)
                     }
                   });
-                  console.log(['myKeys:',myKeys])
 
-                  // THIS BLOCK OF CODE IS BREAKING SOMETHING
+                  // color the counties based on slider selections.
                   if (myKeys.length>0){
                       myKeys.forEach(function(d){
-                          console.log(d)
-                          console.log(d3.select('#c'+d))
-                          console.log(d3.select('#c'+d) != null)
                           if ( d3.select('#c'+d) != null){
-                            console.log(d)
                               var mapClass = d3.select('#c'+d).attr('class');
-                              console.log(mapClass)
                               var mapColor = mapClass.match('^q[0-9]*-[0-9]*')[0];
-                              console.log(mapColor)
                               d3.select('#c'+d).transition()
                                     .duration(1000)
                                     .style('fill','red')
