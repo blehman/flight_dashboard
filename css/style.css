@@ -44,6 +44,7 @@
 .bars.x.axis{
   stroke:none;
   fill:none;
+  display:none;
 }
 */
 
