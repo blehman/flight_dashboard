@@ -638,7 +638,6 @@ function build_selector(){
           console.log(['myKeys:',myKeys])
 
           // THIS BLOCK OF CODE IS BREAKING SOMETHING
-          /*
           if (myKeys.length>0){
               myKeys.forEach(function(d){
                   console.log(d)
@@ -658,7 +657,6 @@ function build_selector(){
 
               })
           }
-          */
 
         }
 
