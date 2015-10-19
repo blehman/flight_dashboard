@@ -645,8 +645,8 @@ function build_choropleth(){
                                     .duration(1000)
                                     .style('fill','red')
                                     .transition()
-                                    .delay(2000)
-                                    .duration(3000)
+                                    .delay(1000)
+                                    .duration(2000)
                                     .style('fill',color_tool[mapColor]);
                           }
 
