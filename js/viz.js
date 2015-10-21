@@ -12,8 +12,7 @@ var width = 3000, height = 3500, circle_r = 200;
 var svg = d3.select('body').append('svg')
           .attr("width",width)
           .attr("height",height)
-          .style('background','#2B3033')
-          .classed('zoom',true);
+          .style('background','#2B3033');
 /*
 var title = svg.append('g')
         .classed('title',true);
@@ -275,8 +274,8 @@ d3.json("data/us-states.json", function(geoJson) {
 function build_arc(){
     var dataset = [ 1369007 ,594421 ];
     var pie = d3.layout.pie();
-    var w = 700;
-    var h = 700;
+    var w = 300;
+    var h = 300;
     var color = d3.scale.quantize()
             .domain([0,1])
             .range(['#fe9929','#fee391']);
@@ -320,7 +319,7 @@ function build_arc(){
 
     // Adjust location
     d3.select('#arcPie',true)
-        .attr('transform','translate('+width/5.8 + ',' + 1800 +')');
+        .attr('transform','translate('+1500 + ',' + 250 +')');
 
 }
 build_arc();
@@ -436,8 +435,8 @@ build_lines();
 function build_bars(){
 
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 400;
+        height = 300;
 
     var x = d3.scale.linear()
         .range([0, width]);
@@ -485,7 +484,7 @@ function build_bars(){
       d.value = +d.value;
       return d;
     }
-    d3.select('#bars').attr('transform','translate('+1400+','+1850+')')
+    d3.select('#bars').attr('transform','translate('+1400+','+700+')')
 }
 
 build_bars()
@@ -500,7 +499,7 @@ function build_choropleth(){
         .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
     var projection = d3.geo.albersUsa()
-        .scale(3000)
+        .scale(1500)
         .translate([width / 2, height / 2]);
 
     var path = d3.geo.path()
@@ -562,8 +561,8 @@ function build_choropleth(){
                 console.log(['brush rateById:',rateById])
                 console.log(['unemp:',unemp])
                 var margin = {top: 194, right: 50, bottom: 214, left: 50},
-                    width = 2000 - margin.left - margin.right,
-                    height = 500 - margin.top - margin.bottom,
+                    width = 1250 - margin.left - margin.right,
+                    height = 80,
                     centering = false,
                     center,
                     alpha = .2;
@@ -707,7 +706,7 @@ function build_choropleth(){
                   });
                 }
                 d3.select('#brush_selector')
-                  .attr('transform','translate('+500+','+0+')');
+                  .attr('transform','translate('+100+','+0+')');
 
             });
         }
@@ -718,10 +717,42 @@ function build_choropleth(){
     }
 
     d3.select(self.frameElement).style("height", height + "px");
-    d3.select('#county_choropleth').attr('transform','translate('+1000+','+700+')')
+    d3.select('#county_choropleth').attr('transform','translate('+300+','+400+')')
 }
 
 build_choropleth()
 
 
+function build_nav_bar(){
+    var navBar = svg.append('g').classed('navBar',true);
+    navBar.append('rect')
+        .attr({
+          'x':0
+          ,'y':0
+          ,'width':1920
+          ,'height':90
+          ,'fill':'#6d6e71'
+        })
 
+    navBar.append('text')
+        .classed('header',true)
+        .text('ANALYTICS')
+        .attr({
+            'x':100
+          , 'y':60
+          , 'stroke':'#fff'
+          , 'fill':'#fff'
+          , 'font-size':40
+        })
+    navBar.append('rect')
+        .classed('signOut',true)
+        .attr({
+            'x':1700
+            ,'y':50
+            ,'width':100
+            ,'height':20
+            ,fill: '#fff'
+            ,stroke:'#fff'
+        })
+}
+build_nav_bar()

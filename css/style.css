@@ -25,6 +25,10 @@
 }
 */
 
+text {
+  font-family: 'Gotham Narrow SSm 3r', Helvetica, Arial, sans-serif;
+  stroke: #fff;
+}
 .bar.positive {
   fill: #fff7bc;
 }
@@ -35,6 +39,7 @@
 
 .axis text {
   font: 10px sans-serif;
+  fill: #fff;
 }
 
 .bars.y.axis{
@@ -47,11 +52,6 @@
   display:none;
 }
 */
-
-/* Zoom selection */
-.zoom {
-    zoom: 0.05;
-}
 
 /* Doughnut */
 .arc{
