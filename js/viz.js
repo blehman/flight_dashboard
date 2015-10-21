@@ -793,7 +793,7 @@ function build_nav_bar(){
             ,'width':1728
             ,'height':918
             ,'fill': 'none'
-            ,'stroke':'#fff'
+            ,'stroke':'none'
             ,'stroke-width':'3px'
             ,'rx': 10
             ,'ry': 10  });
@@ -802,8 +802,8 @@ function build_nav_bar(){
         .classed('signOut',true)
         .text('SIGN OUT')
         .attr({
-            'x':1668
-            ,'y':113
+            'x':1666
+            ,'y':110
             , 'stroke':'#fff'
             , 'fill':'#fff'
             , 'font-size':25
@@ -841,7 +841,7 @@ function build_titles(){
 
     titles.append('text')
         .text('Gender')
-        .classed('choropleth',true)
+        .classed('Gender',true)
         .attr({
             'x':1290
             ,'y':200
@@ -852,13 +852,113 @@ function build_titles(){
 
     titles.append('text')
         .text('Interests')
-        .classed('choropleth',true)
+        .classed('Iterests',true)
         .attr({
             'x':1290
             ,'y':615
             , 'stroke':'#fff'
             , 'fill':'#fff'
             , 'font-size':25
+        });
+
+    titles.append('text')
+        .text('male')
+        .classed('gender',true)
+        .attr({
+            'x':1380
+            ,'y':300
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+    titles.append('text')
+        .text('female')
+        .classed('gender',true)
+        .attr({
+            'x':1695
+            ,'y':450
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+
+    titles.append('text')
+        .text('Avengers: Age...')
+        .classed('Interests',true)
+        .attr({
+            'x':1370
+            ,'y':675
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+    titles.append('text')
+        .text('Empire')
+        .classed('Interests',true)
+        .attr({
+            'x':1390
+            ,'y':710
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+    titles.append('text')
+        .text('The Voice')
+        .classed('Interests',true)
+        .attr({
+            'x':1360
+            ,'y':745
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+titles.append('text')
+        .text('House')
+        .classed('Interests',true)
+        .attr({
+            'x':1412
+            ,'y':780
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+titles.append('text')
+        .text('The Blacklist')
+        .classed('Interests',true)
+        .attr({
+            'x':1370
+            ,'y':882
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+titles.append('text')
+        .text('Dancing with the..')
+        .classed('Interests',true)
+        .attr({
+            'x':1612
+            ,'y':812
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
+        });
+
+titles.append('text')
+        .text('American Idol')
+        .classed('Interests',true)
+        .attr({
+            'x':1643
+            ,'y':850
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':15
         });
 }
 
