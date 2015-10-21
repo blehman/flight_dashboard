@@ -597,7 +597,7 @@ function build_choropleth(){
 
                 var brush = d3.svg.brush()
                     .x(x)
-                    .extent([.15, .20])
+                    .extent([.20, .25])
                     .on("brush", brushmove);
 
                 var arc = d3.svg.arc()
