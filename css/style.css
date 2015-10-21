@@ -38,6 +38,11 @@ text {
   stroke-linecap: round;
 }
 
+g.arc text{
+  fill:none;
+  display: none;
+}
+
 .q0-9 { fill:#ffffe5; }
 .q1-9 { fill:#fff7bc; }
 .q2-9 { fill:#fee391; }

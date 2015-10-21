@@ -319,7 +319,7 @@ function build_arc(){
 
     // Adjust location
     d3.select('#arcPie',true)
-        .attr('transform','translate('+1500 + ',' + 150 +')');
+        .attr('transform','translate('+1400 + ',' + 230 +')');
 
 }
 build_arc();
@@ -435,8 +435,8 @@ build_lines();
 function build_bars(){
 
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
-        width = 400;
-        height = 300;
+        width = 200;
+        height = 250;
 
     var x = d3.scale.linear()
         .range([0, width]);
@@ -484,7 +484,7 @@ function build_bars(){
       d.value = +d.value;
       return d;
     }
-    d3.select('#bars').attr('transform','translate('+1400+','+600+')')
+    d3.select('#bars').attr('transform','translate('+1425+','+620+')')
 }
 
 build_bars()
@@ -740,7 +740,7 @@ function build_choropleth(){
     }
 
     d3.select(self.frameElement).style("height", height + "px");
-    d3.select('#county_choropleth').attr('transform','translate('+300+','+400+')')
+    d3.select('#county_choropleth').attr('transform','translate('+200+','+380+')')
 }
 
 build_choropleth()
@@ -757,6 +757,8 @@ function build_nav_bar(){
           ,'width':1728
           ,'height':90
           ,'fill':'#6d6e71'
+          ,rx:10
+          ,ry:10
         });
 
     navBar.append('text')
@@ -774,7 +776,7 @@ function build_nav_bar(){
         .classed('signOut',true)
         .attr({
             'x':1650
-            ,'y':82
+            ,'y':81
             ,'width':150
             ,'height':40
             ,'fill': 'none'
@@ -801,7 +803,7 @@ function build_nav_bar(){
         .text('SIGN OUT')
         .attr({
             'x':1668
-            ,'y':112
+            ,'y':113
             , 'stroke':'#fff'
             , 'fill':'#fff'
             , 'font-size':25
@@ -836,6 +838,28 @@ function build_titles(){
             , 'fill':'#fff'
             , 'font-size':25
         });
+
+    titles.append('text')
+        .text('Gender')
+        .classed('choropleth',true)
+        .attr({
+            'x':1290
+            ,'y':200
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':25
+        });
+
+    titles.append('text')
+        .text('Interests')
+        .classed('choropleth',true)
+        .attr({
+            'x':1290
+            ,'y':615
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':25
+        });
 }
 
 build_titles()
@@ -846,6 +870,15 @@ function build_lines(){
     lines.append('path')
         .classed('section',true)
         .attr('d','M 120,360, L 1250,360');
+
+    lines.append('path')
+        .classed('section',true)
+        .attr('d','M 1270,180, L 1270,900');
+
+
+    lines.append('path')
+        .classed('section',true)
+        .attr('d','M 1290,570, L 1800,570');
 }
 
 build_lines()
