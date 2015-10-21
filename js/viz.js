@@ -722,7 +722,6 @@ function build_choropleth(){
 
 build_choropleth()
 
-
 function build_nav_bar(){
     var navBar = svg.append('g').classed('navBar',true);
     navBar.append('rect')
@@ -737,6 +736,7 @@ function build_nav_bar(){
     navBar.append('text')
         .classed('header',true)
         .text('ANALYTICS')
+        .style('font-family', 'Gotham Narrow SSm 3r')
         .attr({
             'x':100
           , 'y':60
