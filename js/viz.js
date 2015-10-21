@@ -319,7 +319,7 @@ function build_arc(){
 
     // Adjust location
     d3.select('#arcPie',true)
-        .attr('transform','translate('+1500 + ',' + 250 +')');
+        .attr('transform','translate('+1500 + ',' + 150 +')');
 
 }
 build_arc();
@@ -484,7 +484,7 @@ function build_bars(){
       d.value = +d.value;
       return d;
     }
-    d3.select('#bars').attr('transform','translate('+1400+','+700+')')
+    d3.select('#bars').attr('transform','translate('+1400+','+600+')')
 }
 
 build_bars()
@@ -560,7 +560,7 @@ function build_choropleth(){
                 console.log(["rateById['1001']:",rateById._['1001']])
                 console.log(['brush rateById:',rateById])
                 console.log(['unemp:',unemp])
-                var margin = {top: 194, right: 50, bottom: 214, left: 50},
+                var margin = {top: 144, right: 50, bottom: 214, left: 50},
                     width = 1250 - margin.left - margin.right,
                     height = 80,
                     centering = false,
@@ -717,7 +717,7 @@ function build_choropleth(){
     }
 
     d3.select(self.frameElement).style("height", height + "px");
-    d3.select('#county_choropleth').attr('transform','translate('+300+','+400+')')
+    d3.select('#county_choropleth').attr('transform','translate('+300+','+300+')')
 }
 
 build_choropleth()
@@ -748,11 +748,13 @@ function build_nav_bar(){
         .classed('signOut',true)
         .attr({
             'x':1700
-            ,'y':50
-            ,'width':100
-            ,'height':20
-            ,fill: '#fff'
-            ,stroke:'#fff'
-        })
+            ,'y':30
+            ,'width':150
+            ,'height':40
+            ,'fill': 'none'
+            ,'stroke':'#fff'
+            ,'stroke-width':'3px'
+            ,'rx': 10
+            ,'ry': 10  })
 }
 build_nav_bar()
