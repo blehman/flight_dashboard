@@ -1,32 +1,5 @@
-
-/*
-.state {
-  stroke: #666;
-  fill: none;
-  fill-opacity: 0.6;
-  stroke-width: 5px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.axis path,
-.axis line {
-  shape-rendering: crispEdges;
-}
-
-/*
-.lineGraph.line {
-  fill: none;
-  stroke-width: 5.5px;
-}
-.lineGraph.axis{
-  stroke: #fff;
-  fill:#fff;
-}
-*/
-
 text {
-  font-family: 'Gotham Narrow SSm 3r', Helvetica, Arial, sans-serif;
+  font-family: 'Gotham Narrow SSm', Helvetica, Arial, sans-serif;
   stroke: #fff;
 }
 .bar.positive {
@@ -35,10 +8,6 @@ text {
 
 .bar.negative {
   fill: #fe9929;
-}
-
-.axis text {
-  fill: #fff;
 }
 
 .bars.y.axis{
@@ -50,15 +19,11 @@ text {
   fill:none;
   display:none;
 }
-*/
 
 /* Doughnut */
 .arc{
   stroke: #fff;
 }
-
-
-
 
 /* Choropleth */
 .counties {
@@ -67,7 +32,8 @@ text {
 .states {
   fill: none;
   stroke: #fff;
-  stroke-width: 4px;
+  stroke-opacity: 0.7;
+  stroke-width: 3px;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
@@ -82,7 +48,6 @@ text {
 .q7-9 { fill:#993404; }
 .q8-9 { fill:#662506; }
 
-
 /* Brush Selector */
 .axis path,
 .axis line {
@@ -93,13 +58,13 @@ text {
 }
 
 .axis text {
-  font: 30px sans-serif;
-  fill: #fff7bc;
+  font-size: 20px;
+  fill: #fff;
 }
 
 .dots {
   fill-opacity: .2;
-  fill: #ffffe5;
+  fill:#fff7bc;
 }
 
 .dots .selected {
@@ -121,7 +86,12 @@ text {
   stroke-width: 1.5px;
 }
 
+.section{
+  stroke: #666;
+  stroke-width: 2px;
+  stroke-linecap: round;
 
+}
 /*
 .q0-9 { fill:rgb(247,251,255); }
 .q1-9 { fill:rgb(222,235,247); }

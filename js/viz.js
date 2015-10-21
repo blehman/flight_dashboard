@@ -499,7 +499,7 @@ function build_choropleth(){
         .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
     var projection = d3.geo.albersUsa()
-        .scale(1500)
+        .scale(1100)
         .translate([width / 2, height / 2]);
 
     var path = d3.geo.path()
@@ -560,9 +560,31 @@ function build_choropleth(){
                 console.log(["rateById['1001']:",rateById._['1001']])
                 console.log(['brush rateById:',rateById])
                 console.log(['unemp:',unemp])
-                var margin = {top: 144, right: 50, bottom: 214, left: 50},
-                    width = 1250 - margin.left - margin.right,
-                    height = 80,
+
+                var range = d3.extent(unemp); min = range[0], max = range[1];
+                var color_dots = d3.scale.linear()
+                    .domain([min
+                        , (min+max)/8
+                        , (min+max)/7
+                        , (min+max)/6
+                        , (min+max)/5
+                        , (min+max)/4
+                        , (min+max)/3
+                        , (min+max)/2
+                        , max ])
+                    .range([color_tool['q0-9']
+                        ,color_tool['q1-9']
+                        ,color_tool['q2-9']
+                        ,color_tool['q3-9']
+                        ,color_tool['q4-9']
+                        ,color_tool['q5-9']
+                        ,color_tool['q6-9']
+                        ,color_tool['q7-9']
+                        ,color_tool['q8-9']]);
+
+                var margin = {top: 164, right: 50, bottom: 214, left: 50},
+                    width = 1150 - margin.left - margin.right,
+                    height = 55,
                     centering = false,
                     center,
                     alpha = .2;
@@ -602,6 +624,7 @@ function build_choropleth(){
                   .selectAll("circle")
                     .data(unemp)
                   .enter().append("circle")
+                    .attr('fill',function(d){ return color_dots(d);})
                     .attr("transform", function(d) { return "translate(" + x(d) + "," + y() + ")"; })
                     .attr("r", 5.5);
 
@@ -706,7 +729,7 @@ function build_choropleth(){
                   });
                 }
                 d3.select('#brush_selector')
-                  .attr('transform','translate('+100+','+0+')');
+                  .attr('transform','translate('+100+','+80+')');
 
             });
         }
@@ -717,44 +740,112 @@ function build_choropleth(){
     }
 
     d3.select(self.frameElement).style("height", height + "px");
-    d3.select('#county_choropleth').attr('transform','translate('+300+','+300+')')
+    d3.select('#county_choropleth').attr('transform','translate('+300+','+400+')')
 }
 
 build_choropleth()
 
 
 function build_nav_bar(){
-    var navBar = svg.append('g').classed('navBar',true);
+    svg.append('g').classed('navBar',true);
+    navBar = d3.select('.navBar')
+
     navBar.append('rect')
         .attr({
-          'x':0
-          ,'y':0
-          ,'width':1920
+          'x':96
+          ,'y':54
+          ,'width':1728
           ,'height':90
           ,'fill':'#6d6e71'
-        })
+        });
 
     navBar.append('text')
         .classed('header',true)
         .text('ANALYTICS')
         .attr({
-            'x':100
-          , 'y':60
+            'x':120
+          , 'y':110
           , 'stroke':'#fff'
           , 'fill':'#fff'
           , 'font-size':40
-        })
+        });
+
     navBar.append('rect')
         .classed('signOut',true)
         .attr({
-            'x':1700
-            ,'y':30
+            'x':1650
+            ,'y':82
             ,'width':150
             ,'height':40
             ,'fill': 'none'
             ,'stroke':'#fff'
             ,'stroke-width':'3px'
             ,'rx': 10
-            ,'ry': 10  })
+            ,'ry': 10  });
+
+    navBar.append('rect')
+        .classed('frame',true)
+        .attr({
+            'x':96
+            ,'y':54
+            ,'width':1728
+            ,'height':918
+            ,'fill': 'none'
+            ,'stroke':'#fff'
+            ,'stroke-width':'3px'
+            ,'rx': 10
+            ,'ry': 10  });
+
+    navBar.append('text')
+        .classed('signOut',true)
+        .text('SIGN OUT')
+        .attr({
+            'x':1668
+            ,'y':112
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':25
+        });
 }
 build_nav_bar()
+
+// build titles
+function build_titles(){
+    svg.append('g').classed('titles',true);
+
+    var titles = d3.select('.titles');
+
+    titles.append('text')
+        .text('Audience Interest Level: Books & Sci-Fi')
+        .classed('brush',true)
+        .attr({
+            'x':120
+            ,'y':200
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':25
+        });
+
+    titles.append('text')
+        .text('Audience Location')
+        .classed('choropleth',true)
+        .attr({
+            'x':120
+            ,'y':410
+            , 'stroke':'#fff'
+            , 'fill':'#fff'
+            , 'font-size':25
+        });
+}
+
+build_titles()
+
+// build lines
+function build_lines(){
+    var lines = svg.append('g').classed('lines',true);
+    lines.append('path')
+        .classed('section',true)
+        .attr('d','M 120,360, L 1250,360');
+}
+
+build_lines()
