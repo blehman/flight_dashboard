@@ -736,13 +736,14 @@ function build_nav_bar(){
     navBar.append('text')
         .classed('header',true)
         .text('ANALYTICS')
-        .style('font-family', 'Gotham Narrow SSm 3r')
+        .style('font-family', 'Gotham Narrow SSm 7r')
         .attr({
             'x':100
           , 'y':60
           , 'stroke':'#fff'
           , 'fill':'#fff'
           , 'font-size':40
+          , 'font-weight': 200
         })
     navBar.append('rect')
         .classed('signOut',true)
